@@ -4,17 +4,21 @@ interface CardProps {
   children: React.ReactNode;
   className?: string;
   padding?: boolean;
+  hover?: boolean;
 }
 
 export default function Card({
   children,
   className = '',
   padding = true,
+  hover = false,
 }: CardProps) {
   return (
     <div
-      className={`bg-gray-900 border border-gray-800 rounded-xl ${
+      className={`glass rounded-xl ${
         padding ? 'p-6' : ''
+      } ${
+        hover ? 'hover:glass-strong hover:scale-[1.02] transition-all duration-300 cursor-pointer' : ''
       } ${className}`}
     >
       {children}

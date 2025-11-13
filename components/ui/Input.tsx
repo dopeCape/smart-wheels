@@ -19,9 +19,9 @@ export default function Input({
         </label>
       )}
       <input
-        className={`w-full px-3 py-2 bg-gray-900 border ${
-          error ? 'border-red-500' : 'border-gray-800'
-        } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all ${className}`}
+        className={`w-full px-3 py-2 glass border ${
+          error ? 'border-red-500/50' : 'border-white/10'
+        } rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all hover:border-white/20 ${className}`}
         {...props}
       />
       {error && <p className="mt-1 text-sm text-red-500">{error}</p>}

@@ -14,17 +14,17 @@ export default function Button({
   ...props
 }: ButtonProps) {
   const baseClasses =
-    'font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed';
+    'font-medium rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group';
 
   const variantClasses = {
     primary:
-      'bg-white text-black hover:bg-gray-100 active:bg-gray-200',
+      'bg-gradient-to-r from-white to-gray-100 text-black hover:from-gray-50 hover:to-white hover:shadow-lg hover:shadow-white/20 hover:scale-105 active:scale-95',
     secondary:
-      'bg-gray-800 text-white hover:bg-gray-700 active:bg-gray-600 border border-gray-700',
+      'glass text-white hover:bg-white/10 hover:shadow-lg hover:shadow-white/10 border border-white/20 hover:border-white/30',
     danger:
-      'bg-red-600 text-white hover:bg-red-700 active:bg-red-800',
+      'bg-gradient-to-r from-red-600 to-red-500 text-white hover:from-red-500 hover:to-red-600 hover:shadow-lg hover:shadow-red-500/50 hover:scale-105 active:scale-95',
     ghost:
-      'bg-transparent text-gray-300 hover:bg-gray-800 active:bg-gray-700',
+      'bg-transparent text-gray-300 hover:bg-white/5 hover:text-white active:bg-white/10',
   };
 
   const sizeClasses = {
@@ -38,7 +38,8 @@ export default function Button({
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       {...props}
     >
-      {children}
+      <span className="relative z-10">{children}</span>
+      <div className="absolute inset-0 -z-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000"></div>
     </button>
   );
 }
