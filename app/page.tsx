@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
-import Image from 'next/image';
-import Card from '@/components/ui/Card';
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import Image from "next/image";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
 import {
   Car as CarIcon,
   Users,
@@ -18,8 +18,8 @@ import {
   Shield,
   Clock,
   TrendingUp,
-  ArrowRight
-} from 'lucide-react';
+  ArrowRight,
+} from "lucide-react";
 
 interface Car {
   _id: string;
@@ -41,21 +41,21 @@ export default function HomePage() {
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
-    brand: '',
-    fuelType: '',
-    startDate: '',
-    endDate: '',
+    brand: "",
+    fuelType: "",
+    startDate: "",
+    endDate: "",
   });
 
   const fetchCars = async () => {
     setLoading(true);
     const queryParams = new URLSearchParams();
 
-    if (filters.brand) queryParams.append('brand', filters.brand);
-    if (filters.fuelType) queryParams.append('fuelType', filters.fuelType);
-    if (filters.startDate) queryParams.append('startDate', filters.startDate);
-    if (filters.endDate) queryParams.append('endDate', filters.endDate);
-    queryParams.append('available', 'true');
+    if (filters.brand) queryParams.append("brand", filters.brand);
+    if (filters.fuelType) queryParams.append("fuelType", filters.fuelType);
+    if (filters.startDate) queryParams.append("startDate", filters.startDate);
+    if (filters.endDate) queryParams.append("endDate", filters.endDate);
+    queryParams.append("available", "true");
 
     const response = await fetch(`/api/cars?${queryParams.toString()}`);
     const data = await response.json();
@@ -77,10 +77,10 @@ export default function HomePage() {
 
   const resetFilters = () => {
     setFilters({
-      brand: '',
-      fuelType: '',
-      startDate: '',
-      endDate: '',
+      brand: "",
+      fuelType: "",
+      startDate: "",
+      endDate: "",
     });
     setTimeout(fetchCars, 0);
   };
@@ -97,7 +97,9 @@ export default function HomePage() {
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 glass px-4 py-2 rounded-full mb-8 animate-float">
               <Sparkles className="h-4 w-4 text-indigo-400" />
-              <span className="text-sm text-gray-300">Premium Car Rental Service</span>
+              <span className="text-sm text-gray-300">
+                Premium Car Rental Service
+              </span>
               <div className="h-1.5 w-1.5 rounded-full bg-indigo-400 animate-pulse"></div>
             </div>
 
@@ -114,8 +116,8 @@ export default function HomePage() {
 
             {/* Subtitle */}
             <p className="text-xl sm:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Experience luxury and convenience with our premium fleet of vehicles.
-              Book in seconds, drive in minutes.
+              Experience luxury and convenience with our premium fleet of
+              vehicles. Book in seconds, drive in minutes.
             </p>
 
             {/* CTA Buttons */}
@@ -138,12 +140,19 @@ export default function HomePage() {
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {[
-                { icon: CarIcon, label: 'Premium Cars', value: `${cars.length}+` },
-                { icon: Users, label: 'Happy Customers', value: '5000+' },
-                { icon: Shield, label: 'Insured Fleet', value: '100%' },
-                { icon: Clock, label: 'Support', value: '24/7' },
+                {
+                  icon: CarIcon,
+                  label: "Premium Cars",
+                  value: `${cars.length}+`,
+                },
+                { icon: Users, label: "Happy Customers", value: "5000+" },
+                { icon: Shield, label: "Insured Fleet", value: "100%" },
+                { icon: Clock, label: "Support", value: "24/7" },
               ].map((stat, i) => (
-                <div key={i} className="glass-strong rounded-xl p-4 hover:scale-105 transition-transform duration-300">
+                <div
+                  key={i}
+                  className="glass-strong rounded-xl p-4 hover:scale-105 transition-transform duration-300"
+                >
                   <stat.icon className="h-8 w-8 mx-auto mb-2 text-indigo-400" />
                   <div className="text-2xl font-bold mb-1">{stat.value}</div>
                   <div className="text-sm text-gray-400">{stat.label}</div>
@@ -164,25 +173,33 @@ export default function HomePage() {
           {[
             {
               icon: Zap,
-              title: 'Instant Booking',
-              description: 'Book your perfect ride in seconds with our streamlined process',
-              gradient: 'from-yellow-500 to-orange-500'
+              title: "Instant Booking",
+              description:
+                "Book your perfect ride in seconds with our streamlined process",
+              gradient: "from-yellow-500 to-orange-500",
             },
             {
               icon: Shield,
-              title: 'Fully Insured',
-              description: 'Drive with confidence knowing all our vehicles are fully insured',
-              gradient: 'from-green-500 to-emerald-500'
+              title: "Fully Insured",
+              description:
+                "Drive with confidence knowing all our vehicles are fully insured",
+              gradient: "from-green-500 to-emerald-500",
             },
             {
               icon: TrendingUp,
-              title: 'Best Prices',
-              description: 'Competitive rates with transparent pricing and no hidden fees',
-              gradient: 'from-blue-500 to-indigo-500'
+              title: "Best Prices",
+              description:
+                "Competitive rates with transparent pricing and no hidden fees",
+              gradient: "from-blue-500 to-indigo-500",
             },
           ].map((feature, i) => (
-            <div key={i} className="glass rounded-2xl p-6 hover:glass-strong transition-all duration-300 group">
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} p-3 mb-4 group-hover:scale-110 transition-transform`}>
+            <div
+              key={i}
+              className="glass rounded-2xl p-6 hover:glass-strong transition-all duration-300 group"
+            >
+              <div
+                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.gradient} p-3 mb-4 group-hover:scale-110 transition-transform`}
+              >
                 <feature.icon className="h-full w-full text-white" />
               </div>
               <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
@@ -206,7 +223,7 @@ export default function HomePage() {
               label="Brand"
               placeholder="e.g., Toyota, Honda"
               value={filters.brand}
-              onChange={(e) => handleFilterChange('brand', e.target.value)}
+              onChange={(e) => handleFilterChange("brand", e.target.value)}
             />
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-1.5">
@@ -215,7 +232,7 @@ export default function HomePage() {
               <select
                 className="w-full px-3 py-2 glass rounded-lg text-white border border-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
                 value={filters.fuelType}
-                onChange={(e) => handleFilterChange('fuelType', e.target.value)}
+                onChange={(e) => handleFilterChange("fuelType", e.target.value)}
               >
                 <option value="">All</option>
                 <option value="petrol">Petrol</option>
@@ -228,13 +245,13 @@ export default function HomePage() {
               label="Start Date"
               type="date"
               value={filters.startDate}
-              onChange={(e) => handleFilterChange('startDate', e.target.value)}
+              onChange={(e) => handleFilterChange("startDate", e.target.value)}
             />
             <Input
               label="End Date"
               type="date"
               value={filters.endDate}
-              onChange={(e) => handleFilterChange('endDate', e.target.value)}
+              onChange={(e) => handleFilterChange("endDate", e.target.value)}
             />
           </div>
           <div className="flex gap-3">
@@ -262,13 +279,18 @@ export default function HomePage() {
             <div className="glass-strong rounded-2xl p-12 max-w-md mx-auto">
               <CarIcon className="h-20 w-20 text-gray-600 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold mb-2">No cars available</h3>
-              <p className="text-gray-400">Try adjusting your filters to see more options</p>
+              <p className="text-gray-400">
+                Try adjusting your filters to see more options
+              </p>
             </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cars.map((car) => (
-              <Link key={car._id} href={session ? `/book/${car._id}` : '/login'}>
+              <Link
+                key={car._id}
+                href={session ? `/book/${car._id}` : "/login"}
+              >
                 <Card padding={false} hover className="group overflow-hidden">
                   <div className="relative h-52 bg-gradient-to-br from-gray-800 to-gray-900 overflow-hidden">
                     {car.imageUrl ? (
@@ -320,7 +342,9 @@ export default function HomePage() {
                     <div className="glass-strong rounded-lg p-4 mb-4">
                       <div className="flex justify-between items-center">
                         <div>
-                          <p className="text-xs text-gray-400 mb-1">Cost per km</p>
+                          <p className="text-xs text-gray-400 mb-1">
+                            Cost per km
+                          </p>
                           <p className="text-lg font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
                             ₹{car.costPerKm}
                           </p>
@@ -334,9 +358,11 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <Button variant="primary" className="w-full">
-                      {session ? 'Book Now' : 'Login to Book'}
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <Button
+                      variant="primary"
+                      className="w-full grid place-items-center"
+                    >
+                      {session ? "Book Now" : "Login to Book"}
                     </Button>
                   </div>
                 </Card>
